@@ -1,0 +1,93 @@
+@import 'tailwindcss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: #1f2937;
+  background-color: #f9fafb;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Small utility classes used by components */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-primary {
+  background-color: #059669;
+  color: white;
+}
+.btn-primary:hover { background-color: #047857; }
+.btn-ghost {
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  color: #111827;
+}
+.input-field {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+}
+.input-field:focus { outline: none; box-shadow: 0 0 0 3px rgba(16,185,129,0.08); border-color: #10b981; }
+
+/* Modal visibility fixes for auth modal */
+.modal-overlay {
+  z-index: 1040;
+}
+.auth-modal {
+  z-index: 1060;
+}
+.auth-modal label {
+  display: block;
+  color: #374151; /* ensure labels are visible */
+  margin-bottom: 0.25rem;
+}
+.auth-modal .input-field {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-20px); 
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.shadow-glow {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #10b981, #059669);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
