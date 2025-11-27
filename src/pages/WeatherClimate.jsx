@@ -171,7 +171,7 @@ const WeatherClimate = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-8 text-white"
+        className="bg-blue-600 rounded-2xl p-8 text-white shadow-lg"
       >
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="lg:col-span-2">
