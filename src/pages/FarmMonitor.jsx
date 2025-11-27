@@ -190,7 +190,7 @@ const FarmMonitor = () => {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Farm Monitor</h1>
+          <h1 className="text-3xl font-bold text-emerald-600">Farm Monitor</h1>
           <p className="text-gray-600 mt-1">Real-time monitoring and threat detection</p>
         </div>
         <button 

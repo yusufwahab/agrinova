@@ -233,7 +233,7 @@ const LivestockManager = () => {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Livestock Manager</h1>
+          <h1 className="text-3xl font-bold text-emerald-600">Livestock Manager</h1>
           <p className="text-gray-600 mt-1">Monitor animal health, breeding, and production</p>
         </div>
         <button 

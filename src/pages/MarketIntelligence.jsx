@@ -235,7 +235,7 @@ const MarketIntelligence = () => {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Market Intelligence</h1>
+          <h1 className="text-3xl font-bold text-emerald-600">Market Intelligence</h1>
           <p className="text-gray-600 mt-1">Real-time pricing, demand forecasts, and buyer network</p>
         </div>
         <div className="flex items-center space-x-3 mt-4 lg:mt-0">

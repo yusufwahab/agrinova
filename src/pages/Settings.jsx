@@ -81,7 +81,7 @@ const Settings = () => {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
+          <h1 className="text-3xl font-bold text-emerald-600">Settings</h1>
           <p className="text-gray-600 mt-1">Manage your account, farm configuration, and preferences</p>
         </div>
       </div>
@@ -89,7 +89,7 @@ const Settings = () => {
       {/* Settings Navigation */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100">
         <div className="border-b border-gray-200">
-          <nav className="flex space-x-8 px-6">
+          <nav className="flex space-x-4 px-4 overflow-x-auto no-scrollbar -mx-4 scroll-hint scroll-hint-dark">
             {[
               { id: 'profile', name: 'Profile', icon: User },
               { id: 'farm', name: 'Farm Setup', icon: MapPin },
@@ -103,7 +103,7 @@ const Settings = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center py-4 px-1 border-b-2 font-medium text-sm ${
+                  className={`flex items-center shrink-0 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm ${
                     activeTab === tab.id
                       ? 'border-emerald-500 text-emerald-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'

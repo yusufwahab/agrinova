@@ -174,7 +174,7 @@ const SoilAnalysis = () => {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Soil & Crop Health Analysis</h1>
+          <h1 className="text-3xl font-bold text-emerald-600">Soil & Crop Health Analysis</h1>
           <p className="text-gray-600 mt-1">AI-powered soil analysis and crop optimization</p>
         </div>
         <button className="btn btn-primary mt-4 lg:mt-0">
