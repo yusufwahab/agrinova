@@ -178,18 +178,18 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col space-y-4">
         <div>
-          <h1 className="text-3xl font-bold text-emerald-600">Farm Dashboard</h1>
-          <p className="text-gray-600 mt-1">Welcome back! Here's what's happening on your farm today.</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-emerald-600">Farm Dashboard</h1>
+          <p className="text-gray-600 mt-1 text-sm sm:text-base">Welcome back! Here's what's happening on your farm today.</p>
         </div>
-        <div className="flex items-center space-x-4 mt-4 lg:mt-0">
-          <div className="text-sm text-gray-500">Last updated: 5 minutes ago</div>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="text-xs sm:text-sm text-gray-500">Last updated: 5 minutes ago</div>
           <button 
             onClick={() => openModal('quickActions')}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center"
+            className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center text-sm sm:text-base"
           >
             <Plus className="w-4 h-4 mr-2" />
             Quick Action
@@ -198,23 +198,23 @@ const Dashboard = () => {
       </div>
 
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
+          className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
           onClick={() => openModal('farmHealth')}
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Farm Health Score</p>
-              <p className="text-3xl font-bold text-gray-900">{farmHealthScore}</p>
+              <p className="text-xs sm:text-sm font-medium text-gray-600">Farm Health Score</p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900">{farmHealthScore}</p>
               <div className="flex items-center mt-1">
-                <ArrowUp className="w-4 h-4 text-green-500" />
-                <span className="text-sm text-green-600 ml-1">+5% from last week</span>
+                <ArrowUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
+                <span className="text-xs sm:text-sm text-green-600 ml-1">+5% from last week</span>
               </div>
             </div>
-            <Shield className="w-12 h-12 text-emerald-600" />
+            <Shield className="w-8 h-8 sm:w-12 sm:h-12 text-emerald-600" />
           </div>
         </motion.div>
 
@@ -222,60 +222,60 @@ const Dashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
+          className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
           onClick={() => openModal('activeAlerts')}
         >
-          <p className="text-sm font-medium text-gray-600">Active Alerts</p>
-          <p className="text-3xl font-bold text-gray-900 mt-2">{alerts.length}</p>
-          <p className="text-sm text-yellow-600 mt-1">2 require attention</p>
+          <p className="text-xs sm:text-sm font-medium text-gray-600">Active Alerts</p>
+          <p className="text-2xl sm:text-3xl font-bold text-gray-900 mt-2">{alerts.length}</p>
+          <p className="text-xs sm:text-sm text-yellow-600 mt-1">2 require attention</p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
+          className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
           onClick={() => openModal('yieldAnalysis')}
         >
-          <p className="text-sm font-medium text-gray-600">Yield This Month</p>
-          <p className="text-3xl font-bold text-gray-900 mt-2">4,250 kg</p>
-          <p className="text-sm text-green-600 mt-1">↑ 12% vs last month</p>
+          <p className="text-xs sm:text-sm font-medium text-gray-600">Yield This Month</p>
+          <p className="text-2xl sm:text-3xl font-bold text-gray-900 mt-2">4,250 kg</p>
+          <p className="text-xs sm:text-sm text-green-600 mt-1">↑ 12% vs last month</p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
+          className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
           onClick={() => openModal('soilHealth')}
         >
-          <p className="text-sm font-medium text-gray-600">Soil Health</p>
-          <p className="text-3xl font-bold text-gray-900 mt-2">8.2/10</p>
-          <p className="text-sm text-emerald-600 mt-1">Excellent condition</p>
+          <p className="text-xs sm:text-sm font-medium text-gray-600">Soil Health</p>
+          <p className="text-2xl sm:text-3xl font-bold text-gray-900 mt-2">8.2/10</p>
+          <p className="text-xs sm:text-sm text-emerald-600 mt-1">Excellent condition</p>
         </motion.div>
       </div>
 
       {/* Alerts Section */}
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid lg:grid-cols-3 gap-4 sm:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="lg:col-span-2 bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+          className="lg:col-span-2 bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">Recent Alerts</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Recent Alerts</h3>
           <div className="space-y-4">
             {alerts.map((alert) => {
               const Icon = getAlertIcon(alert.type);
               return (
-                <div key={alert.id} className={`alert-card ${getAlertColor(alert.severity)} p-4 rounded-lg border`}>
+                <div key={alert.id} className={`alert-card ${getAlertColor(alert.severity)} p-3 sm:p-4 rounded-lg border`}>
                   <div className="flex items-start">
-                    <Icon className="w-5 h-5 mr-3 mt-0.5" />
+                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 mt-0.5" />
                     <div className="flex-1">
-                      <h4 className="font-medium">{alert.title}</h4>
-                      <p className="text-sm opacity-90 mt-1">{alert.description}</p>
+                      <h4 className="text-sm sm:text-base font-medium">{alert.title}</h4>
+                      <p className="text-xs sm:text-sm opacity-90 mt-1">{alert.description}</p>
                       <div className="flex items-center justify-between mt-3">
-                        <span className="text-xs font-medium">Recommended: {alert.action}</span>
+                        <span className="text-xs font-medium hidden sm:inline">Recommended: {alert.action}</span>
                         <div className="flex space-x-2">
                           <button onClick={() => handleDismiss(alert.id)} className="text-xs bg-white bg-opacity-20 hover:bg-opacity-30 px-3 py-1 rounded-full transition-colors">
                             Dismiss
@@ -297,9 +297,9 @@ const Dashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+          className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">Quick Actions</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Quick Actions</h3>
           <div className="space-y-3">
             {[
               { icon: Camera, title: 'Scan Crop', desc: 'Take a photo for AI analysis', route: '/farm-monitor' },
@@ -317,13 +317,13 @@ const Dashboard = () => {
                     else if (action.title === 'Weather') window.location.href = '/weather-climate';
                     else if (action.title === 'Analytics') window.location.href = '/records-finance';
                   }}
-                  className="w-full p-3 text-left rounded-lg border border-gray-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors"
+                  className="w-full p-2 sm:p-3 text-left rounded-lg border border-gray-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors"
                 >
                   <div className="flex items-center">
-                    <Icon className="w-4 h-4 mr-2 text-emerald-600" />
+                    <Icon className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-emerald-600" />
                     <div>
-                      <div className="text-sm font-medium text-gray-900">{action.title}</div>
-                      <div className="text-xs text-gray-500">{action.desc}</div>
+                      <div className="text-xs sm:text-sm font-medium text-gray-900">{action.title}</div>
+                      <div className="text-xs text-gray-500 hidden sm:block">{action.desc}</div>
                     </div>
                   </div>
                 </button>
@@ -334,15 +334,15 @@ const Dashboard = () => {
       </div>
 
       {/* Charts Section */}
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+          className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">Crop Yield Trends</h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Crop Yield Trends</h3>
+          <ResponsiveContainer width="100%" height={250}>
             <LineChart data={yieldData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
               <XAxis dataKey="month" stroke="#6b7280" />
@@ -358,10 +358,10 @@ const Dashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+          className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">Weather Forecast</h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Weather Forecast</h3>
+          <ResponsiveContainer width="100%" height={250}>
             <AreaChart data={weatherData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
               <XAxis dataKey="day" stroke="#6b7280" />
@@ -374,27 +374,27 @@ const Dashboard = () => {
       </div>
 
       {/* Activity & Expenses */}
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid lg:grid-cols-3 gap-4 sm:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="lg:col-span-2 bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+          className="lg:col-span-2 bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">Recent Activity</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Recent Activity</h3>
           <div className="space-y-4">
             {recentActivities.map((activity, index) => (
-              <div key={index} className="flex items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <div className={`w-2 h-2 rounded-full mr-4 ${
+              <div key={index} className="flex items-center p-2 sm:p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                <div className={`w-2 h-2 rounded-full mr-3 sm:mr-4 ${
                   activity.status === 'success' ? 'bg-green-500' :
                   activity.status === 'warning' ? 'bg-yellow-500' :
                   'bg-blue-500'
                 }`} />
                 <div className="flex-1">
-                  <div className="font-medium text-gray-900">{activity.title}</div>
-                  <div className="text-sm text-gray-500">{activity.time}</div>
+                  <div className="text-sm sm:text-base font-medium text-gray-900">{activity.title}</div>
+                  <div className="text-xs sm:text-sm text-gray-500">{activity.time}</div>
                 </div>
-                <Eye className="w-4 h-4 text-gray-400" />
+                <Eye className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400" />
               </div>
             ))}
           </div>
@@ -404,9 +404,9 @@ const Dashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
+          className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">Expense Breakdown</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Expense Breakdown</h3>
           <ResponsiveContainer width="100%" height={200}>
             <PieChart>
               <Pie data={expenseData} cx="50%" cy="50%" innerRadius={40} outerRadius={80} paddingAngle={5} dataKey="value">
@@ -419,7 +419,7 @@ const Dashboard = () => {
           </ResponsiveContainer>
           <div className="space-y-2 mt-4">
             {expenseData.map((item, index) => (
-              <div key={index} className="flex items-center justify-between text-sm">
+              <div key={index} className="flex items-center justify-between text-xs sm:text-sm">
                 <div className="flex items-center">
                   <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: item.color }} />
                   <span className="text-gray-600">{item.name}</span>

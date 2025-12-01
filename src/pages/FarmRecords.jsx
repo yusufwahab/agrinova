@@ -159,15 +159,15 @@ const FarmRecords = () => {
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col space-y-4">
         <div>
-          <h1 className="text-3xl font-bold text-emerald-600">Farm Records</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-emerald-600">Farm Records</h1>
           <p className="text-gray-600 mt-1">Track activities, inventory, and workforce</p>
         </div>
-        <div className="flex items-center space-x-4 mt-4 lg:mt-0">
+        <div className="flex flex-col sm:flex-row gap-3">
           <button 
             onClick={isRecording ? stopRecording : startRecording}
-            className={`px-6 py-3 rounded-lg font-medium transition-colors flex items-center ${
+            className={`px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium transition-colors flex items-center justify-center text-sm sm:text-base ${
               isRecording 
                 ? 'bg-red-600 hover:bg-red-700 text-white animate-pulse' 
                 : 'bg-blue-600 hover:bg-blue-700 text-white'
@@ -178,7 +178,7 @@ const FarmRecords = () => {
           </button>
           <button 
             onClick={() => setShowForm(true)}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center"
+            className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium transition-colors flex items-center justify-center text-sm sm:text-base"
           >
             <Plus className="w-4 h-4 mr-2" />
             Add Entry
@@ -221,7 +221,7 @@ const FarmRecords = () => {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Activity Type</label>
                     <select 
@@ -254,9 +254,6 @@ const FarmRecords = () => {
                       <option value="Zone D">Zone D</option>
                     </select>
                   </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Crop</label>
                     <select 
@@ -330,7 +327,7 @@ const FarmRecords = () => {
       {/* Main Content */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100">
         <div className="border-b border-gray-200">
-          <nav className="flex space-x-8 px-6">
+          <nav className="flex overflow-x-auto px-4 sm:px-6">
             {[
               { id: 'log', name: 'Activity Log', icon: Clock },
               { id: 'inventory', name: 'Inventory', icon: Package },
@@ -342,35 +339,36 @@ const FarmRecords = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center py-4 px-1 border-b-2 font-medium text-sm ${
+                  className={`flex items-center py-3 sm:py-4 px-2 sm:px-4 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap ${
                     activeTab === tab.id
                       ? 'border-emerald-500 text-emerald-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
                 >
-                  <Icon className="w-4 h-4 mr-2" />
-                  {tab.name}
+                  <Icon className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">{tab.name}</span>
+                  <span className="sm:hidden">{tab.name.split(' ')[0]}</span>
                 </button>
               );
             })}
           </nav>
         </div>
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {activeTab === 'log' && (
             <div className="space-y-6">
-              <div className="flex items-center justify-between">
+              <div className="space-y-4">
                 <h3 className="text-lg font-semibold text-gray-900">Recent Activities</h3>
-                <div className="flex items-center space-x-4">
-                  <div className="relative">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <div className="relative flex-1">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <input
                       type="text"
                       placeholder="Search activities..."
-                      className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
                     />
                   </div>
-                  <button className="flex items-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                  <button className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 whitespace-nowrap">
                     <Filter className="w-4 h-4 mr-2" />
                     Filter
                   </button>
@@ -412,8 +410,10 @@ const FarmRecords = () => {
                           </div>
                         </div>
                       </div>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-gray-200">
                       <button className="text-emerald-600 hover:text-emerald-700 text-sm font-medium">
-                        Edit
+                        Edit Activity
                       </button>
                     </div>
                   </motion.div>

@@ -162,24 +162,24 @@ const WeatherClimate = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col space-y-4">
         <div>
-          <h1 className="text-3xl font-bold text-emerald-600">Weather & Climate Intelligence</h1>
-          <p className="text-gray-600 mt-1">Hyper-local forecasts and climate-smart recommendations</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-emerald-600">Weather & Climate Intelligence</h1>
+          <p className="text-gray-600 mt-1 text-sm sm:text-base">Hyper-local forecasts and climate-smart recommendations</p>
         </div>
-        <div className="flex items-center space-x-4 mt-4 lg:mt-0">
+        <div className="flex flex-col sm:flex-row gap-3">
           <button 
             onClick={() => openModal('changeLocation')}
-            className="flex items-center px-4 py-2 text-gray-600 hover:text-gray-800"
+            className="flex items-center justify-center px-4 py-2 text-gray-600 hover:text-gray-800 border border-gray-300 rounded-lg text-sm sm:text-base"
           >
             <MapPin className="w-4 h-4 mr-2" />
             Change Location
           </button>
           <button 
             onClick={() => openModal('weatherForecast')}
-            className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors flex items-center"
+            className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors flex items-center justify-center text-sm sm:text-base"
           >
             <RefreshCw className="w-4 h-4 mr-2" />
             Extended Forecast
@@ -191,9 +191,9 @@ const WeatherClimate = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-blue-600 rounded-2xl p-8 text-white shadow-lg"
+        className="bg-blue-600 rounded-2xl p-4 sm:p-8 text-white shadow-lg"
       >
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           <div className="lg:col-span-2">
             <div className="flex items-center mb-4">
               <MapPin className="w-5 h-5 mr-2" />
@@ -201,12 +201,12 @@ const WeatherClimate = () => {
             </div>
             <div className="flex items-center space-x-6">
               <div>
-                <div className="text-6xl font-bold">{currentWeather.temperature}°</div>
+                <div className="text-4xl sm:text-6xl font-bold">{currentWeather.temperature}°</div>
                 <div className="text-blue-100">Feels like {currentWeather.feelsLike}°F</div>
               </div>
               <div className="text-center">
-                <Cloud className="w-16 h-16 text-blue-200 mx-auto mb-2" />
-                <div className="text-lg font-medium">{currentWeather.condition}</div>
+                <Cloud className="w-12 h-12 sm:w-16 sm:h-16 text-blue-200 mx-auto mb-2" />
+                <div className="text-base sm:text-lg font-medium">{currentWeather.condition}</div>
               </div>
             </div>
           </div>

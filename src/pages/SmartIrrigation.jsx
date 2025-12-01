@@ -54,20 +54,20 @@ const SmartIrrigation = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col space-y-4">
         <div>
-          <h1 className="text-3xl font-bold text-blue-600">Smart Irrigation</h1>
-          <p className="text-gray-600 mt-1">AI-powered water management system</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-emerald-600">Smart Irrigation</h1>
+          <p className="text-gray-600 mt-1 text-sm sm:text-base">AI-powered water management system</p>
         </div>
-        <div className="flex items-center space-x-4 mt-4 lg:mt-0">
+        <div className="flex justify-center sm:justify-start">
           <button 
             onClick={() => setIrrigationActive(!irrigationActive)}
-            className={`px-6 py-3 rounded-lg font-medium transition-colors flex items-center ${
+            className={`px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium transition-colors flex items-center text-sm sm:text-base ${
               irrigationActive 
                 ? 'bg-red-600 hover:bg-red-700 text-white' 
-                : 'bg-blue-600 hover:bg-blue-700 text-white'
+                : 'bg-emerald-600 hover:bg-emerald-700 text-white'
             }`}
           >
             {irrigationActive ? <Pause className="w-4 h-4 mr-2" /> : <Play className="w-4 h-4 mr-2" />}
@@ -77,7 +77,7 @@ const SmartIrrigation = () => {
       </div>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -417,7 +417,7 @@ const SmartIrrigation = () => {
 
               <div className="bg-emerald-50 p-6 rounded-xl">
                 <h4 className="font-semibold text-emerald-900 mb-4">💡 Drip Irrigation Calculator</h4>
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-emerald-800 mb-2">Area (acres)</label>
                     <input type="number" className="w-full px-3 py-2 border border-emerald-300 rounded-lg" placeholder="5.0" />

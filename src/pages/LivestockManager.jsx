@@ -168,12 +168,34 @@ const LivestockManager = () => {
     switch (modalType) {
       case 'addAnimal':
         return (
-          <div className="space-y-4">
-            <p className="text-gray-600 mb-4">Add a new animal to your livestock registry with complete health and production tracking.</p>
-            <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-6">
+            <p className="text-gray-600">Add a new animal to your livestock registry with complete health and production tracking.</p>
+            
+            {/* Image Upload Section */}
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h4 className="font-semibold text-gray-900 mb-3">Animal Photo</h4>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button className="flex items-center justify-center px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-emerald-400 hover:bg-emerald-50 transition-colors">
+                  <Camera className="w-5 h-5 mr-2 text-gray-400" />
+                  <span className="text-sm text-gray-600">Take Photo</span>
+                </button>
+                <button className="flex items-center justify-center px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-emerald-400 hover:bg-emerald-50 transition-colors">
+                  <Plus className="w-5 h-5 mr-2 text-gray-400" />
+                  <span className="text-sm text-gray-600">Choose Image</span>
+                </button>
+              </div>
+              <p className="text-xs text-gray-500 mt-2">Upload a clear photo for easy identification</p>
+            </div>
+
+            {/* Basic Information */}
+            <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Animal Name</label>
                 <input type="text" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Enter name" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Ear Tag/ID</label>
+                <input type="text" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="e.g., C001" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Species</label>
@@ -185,9 +207,41 @@ const LivestockManager = () => {
                   <option>Goats</option>
                 </select>
               </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Breed</label>
+                <input type="text" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Enter breed" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                <input type="text" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="e.g., 2 years" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Weight</label>
+                <input type="text" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="e.g., 1200 lbs" />
+              </div>
             </div>
-            <div className="flex justify-end space-x-3 mt-6">
-              <button onClick={closeModal} className="px-4 py-2 text-gray-600 hover:text-gray-800">Cancel</button>
+
+            {/* Health Information */}
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <h4 className="font-semibold text-blue-900 mb-3">Health Information</h4>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Health Status</label>
+                  <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500">
+                    <option>Healthy</option>
+                    <option>Needs Attention</option>
+                    <option>Sick</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Last Checkup</label>
+                  <input type="date" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500" />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row justify-end gap-3 mt-6">
+              <button onClick={closeModal} className="px-4 py-2 text-gray-600 hover:text-gray-800 border border-gray-300 rounded-lg">Cancel</button>
               <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg">Add Animal</button>
             </div>
           </div>
@@ -753,37 +807,39 @@ const LivestockManager = () => {
       {/* Animal Registry */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100">
         <div className="p-6 border-b border-gray-200">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+          <div className="flex flex-col space-y-4">
             <h3 className="text-lg font-semibold text-gray-900">Animal Registry</h3>
             
-            <div className="flex items-center space-x-4">
-              <div className="relative">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
                   type="text"
                   placeholder="Search animals..."
-                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                 />
               </div>
               
-              <button className="flex items-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
-                <Filter className="w-4 h-4 mr-2" />
-                Filter
-              </button>
-              
-              <div className="flex items-center border border-gray-300 rounded-lg">
-                <button
-                  onClick={() => setViewMode('grid')}
-                  className={`p-2 ${viewMode === 'grid' ? 'bg-emerald-100 text-emerald-600' : 'text-gray-400 hover:text-gray-600'}`}
-                >
-                  <Grid className="w-4 h-4" />
+              <div className="flex gap-2">
+                <button className="flex items-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 whitespace-nowrap">
+                  <Filter className="w-4 h-4 mr-2" />
+                  Filter
                 </button>
-                <button
-                  onClick={() => setViewMode('list')}
-                  className={`p-2 ${viewMode === 'list' ? 'bg-emerald-100 text-emerald-600' : 'text-gray-400 hover:text-gray-600'}`}
-                >
-                  <List className="w-4 h-4" />
-                </button>
+                
+                <div className="flex items-center border border-gray-300 rounded-lg">
+                  <button
+                    onClick={() => setViewMode('grid')}
+                    className={`p-2 ${viewMode === 'grid' ? 'bg-emerald-100 text-emerald-600' : 'text-gray-400 hover:text-gray-600'}`}
+                  >
+                    <Grid className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => setViewMode('list')}
+                    className={`p-2 ${viewMode === 'list' ? 'bg-emerald-100 text-emerald-600' : 'text-gray-400 hover:text-gray-600'}`}
+                  >
+                    <List className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>

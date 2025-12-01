@@ -288,37 +288,36 @@ const Community = () => {
               <div className="space-y-8">
                 {/* Create Post */}
                 <div className="bg-gradient-to-r from-emerald-50 to-blue-50 rounded-2xl p-6 border border-emerald-200">
-                  <div className="flex items-start space-x-4">
-                    <img
-                      src="/api/placeholder/50/50"
-                      alt="Your avatar"
-                      className="w-12 h-12 rounded-full border-2 border-white shadow-sm"
-                    />
-                    <div className="flex-1">
-                      <textarea
-                        value={newPost}
-                        onChange={(e) => setNewPost(e.target.value)}
-                        placeholder="Share your farming experience, ask questions, or offer advice..."
-                        className="w-full p-4 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white"
-                        rows={3}
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-4">
+                      <img
+                        src="/api/placeholder/50/50"
+                        alt="Your avatar"
+                        className="w-12 h-12 rounded-full border-2 border-white shadow-sm"
                       />
-                      <div className="flex items-center justify-between mt-4">
-                        <div className="flex items-center space-x-4">
-                          <button className="flex items-center text-gray-600 hover:text-emerald-600 transition-colors">
-                            <Camera className="w-5 h-5 mr-2" />
-                            Photo
-                          </button>
-                          <button className="flex items-center text-gray-600 hover:text-emerald-600 transition-colors">
-                            <MapPin className="w-5 h-5 mr-2" />
-                            Location
-                          </button>
-                        </div>
-                        <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center">
-                          <Plus className="w-5 h-5 mr-2" />
-                          Post
-                        </button>
-                      </div>
+                      <span className="text-gray-700 font-medium">Share your farming experience, ask questions, or offer advice...</span>
                     </div>
+                    <textarea
+                      value={newPost}
+                      onChange={(e) => setNewPost(e.target.value)}
+                      placeholder="Share your farming experience, ask questions, or offer advice..."
+                      className="w-full p-4 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white"
+                      rows={3}
+                    />
+                    <div className="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
+                      <button className="flex items-center justify-center text-gray-600 hover:text-emerald-600 transition-colors py-2 px-4 border border-gray-300 rounded-xl hover:border-emerald-300">
+                        <Camera className="w-5 h-5 mr-2" />
+                        Photo
+                      </button>
+                      <button className="flex items-center justify-center text-gray-600 hover:text-emerald-600 transition-colors py-2 px-4 border border-gray-300 rounded-xl hover:border-emerald-300">
+                        <MapPin className="w-5 h-5 mr-2" />
+                        Location
+                      </button>
+                    </div>
+                    <button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center justify-center">
+                      <Plus className="w-5 h-5 mr-2" />
+                      Post
+                    </button>
                   </div>
                 </div>
 
@@ -475,8 +474,8 @@ const Community = () => {
 
                 {/* Search and Filter */}
                 <div className="bg-gray-50 rounded-2xl p-6">
-                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
-                    <div className="relative flex-1 max-w-lg">
+                  <div className="space-y-4">
+                    <div className="relative">
                       <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                       <input
                         type="text"
@@ -484,14 +483,14 @@ const Community = () => {
                         className="pl-12 pr-4 py-3 w-full border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                       />
                     </div>
-                    <div className="flex items-center space-x-4">
-                      <select className="border border-gray-300 rounded-xl px-4 py-3">
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <select className="flex-1 border border-gray-300 rounded-xl px-4 py-3">
                         <option>All Categories</option>
                         <option>Soil Management</option>
                         <option>Pest Control</option>
                         <option>Water Management</option>
                       </select>
-                      <button className="flex items-center px-6 py-3 border border-gray-300 rounded-xl hover:bg-white transition-colors">
+                      <button className="flex items-center justify-center px-6 py-3 border border-gray-300 rounded-xl hover:bg-white transition-colors whitespace-nowrap">
                         <Filter className="w-5 h-5 mr-2" />
                         Filter
                       </button>
