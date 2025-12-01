@@ -12,6 +12,9 @@ import RecordsFinance from './pages/RecordsFinance';
 import MarketIntelligence from './pages/MarketIntelligence';
 import Community from './pages/Community';
 import Settings from './pages/Settings';
+import Notifications from './pages/Notifications';
+import SmartIrrigation from './pages/SmartIrrigation';
+import FarmRecords from './pages/FarmRecords';
 import Layout from './components/Layout';
 import AuthProvider from './contexts/AuthContext';
 
@@ -31,6 +34,9 @@ function App() {
             <Route path="/market" element={<Layout><MarketIntelligence /></Layout>} />
             <Route path="/community" element={<Layout><Community /></Layout>} />
             <Route path="/settings" element={<Layout><Settings /></Layout>} />
+            <Route path="/notifications" element={<Layout><Notifications /></Layout>} />
+            <Route path="/smart-irrigation" element={<Layout><SmartIrrigation /></Layout>} />
+            <Route path="/farm-records" element={<Layout><FarmRecords /></Layout>} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="*" element={<Navigate to="/" replace />} />

@@ -7,10 +7,21 @@ import {
   Target, Clock, BarChart3, AlertCircle
 } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import Modal from '../components/Modal';
+import { getGlobalModalTitle, renderGlobalModalContent } from '../utils/globalModals.jsx';
 
 const MarketIntelligence = () => {
   const [selectedCrop, setSelectedCrop] = useState('tomatoes');
   const [priceAlerts, setPriceAlerts] = useState([]);
+  const [activeModal, setActiveModal] = useState(null);
+
+  const openModal = (modalType) => {
+    setActiveModal(modalType);
+  };
+
+  const closeModal = () => {
+    setActiveModal(null);
+  };
 
   const marketPrices = [
     {
@@ -239,11 +250,17 @@ const MarketIntelligence = () => {
           <p className="text-gray-600 mt-1">Real-time pricing, demand forecasts, and buyer network</p>
         </div>
         <div className="flex items-center space-x-3 mt-4 lg:mt-0">
-          <button className="btn btn-ghost">
+          <button 
+            onClick={() => openModal('priceAlerts')}
+            className="btn btn-ghost"
+          >
             <Bell className="w-4 h-4 mr-2" />
             Price Alerts
           </button>
-          <button className="btn btn-primary">
+          <button 
+            onClick={() => openModal('findBuyers')}
+            className="btn btn-primary"
+          >
             <Target className="w-4 h-4 mr-2" />
             Find Buyers
           </button>
@@ -581,6 +598,18 @@ const MarketIntelligence = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Modal Content Renderer */}
+      {activeModal && (
+        <Modal
+          isOpen={true}
+          onClose={closeModal}
+          title={getGlobalModalTitle(activeModal)}
+          size="md"
+        >
+          {renderGlobalModalContent(activeModal, closeModal, openModal)}
+        </Modal>
+      )}
     </div>
   );
 };

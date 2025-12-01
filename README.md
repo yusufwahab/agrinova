@@ -1,6 +1,6 @@
-# AgroGuard AI - Comprehensive Farm Management Platform
+# Agronova - Comprehensive Farm Management Platform
 
-AgroGuard AI is a professional, AI-powered agriculture management platform that helps farmers monitor crops, predict weather risks, analyze soil health, manage livestock, and optimize farm operations.
+Agronova is a professional, AI-powered agriculture management platform that helps farmers monitor crops, predict weather risks, analyze soil health, manage livestock, and optimize farm operations.
 
 ## 🌟 Features
 

@@ -12,6 +12,18 @@ const Dashboard = () => {
   const [farmHealthScore] = useState(85);
   const [actionModalOpen, setActionModalOpen] = useState(false);
   const [selectedAlert, setSelectedAlert] = useState(null);
+  const [activeModal, setActiveModal] = useState(null);
+  const [modalData, setModalData] = useState(null);
+
+  const openModal = (modalType, data = null) => {
+    setActiveModal(modalType);
+    setModalData(data);
+  };
+
+  const closeModal = () => {
+    setActiveModal(null);
+    setModalData(null);
+  };
   
   const [alerts, setAlerts] = useState([
     {
@@ -105,6 +117,66 @@ const Dashboard = () => {
     setActionModalOpen(true);
   };
 
+  const getModalTitle = (modalType) => {
+    const titles = {
+      farmHealth: 'Farm Health Analysis',
+      activeAlerts: 'Active Alerts Management',
+      yieldAnalysis: 'Yield Performance Analysis',
+      soilHealth: 'Soil Health Report',
+      scanCrop: 'AI Crop Scanner',
+      soilAnalysis: 'Soil Sample Analysis',
+      weatherForecast: 'Weather Intelligence',
+      farmAnalytics: 'Farm Analytics Dashboard',
+      quickActions: 'Quick Actions Menu'
+    };
+    return titles[modalType] || 'Information';
+  };
+
+  const renderModalContent = (modalType) => {
+    switch (modalType) {
+      case 'farmHealth':
+        return (
+          <div className="space-y-4">
+            <div className="text-center">
+              <div className="text-6xl font-bold text-emerald-600 mb-2">{farmHealthScore}</div>
+              <p className="text-gray-600 mb-4">Your farm is performing excellently with strong health indicators across all metrics.</p>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-green-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-green-900 mb-2">Crop Health</h4>
+                <div className="text-2xl font-bold text-green-600">92%</div>
+                <p className="text-sm text-green-700">Excellent growth patterns</p>
+              </div>
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-blue-900 mb-2">Soil Quality</h4>
+                <div className="text-2xl font-bold text-blue-600">88%</div>
+                <p className="text-sm text-blue-700">Optimal nutrient levels</p>
+              </div>
+            </div>
+          </div>
+        );
+      
+      case 'scanCrop':
+        return (
+          <div className="space-y-4">
+            <p className="text-gray-600 mb-4">Upload a photo of your crops for instant AI-powered analysis and recommendations.</p>
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+              <Camera className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+              <p className="text-gray-600 mb-2">Click to upload or drag and drop</p>
+              <p className="text-sm text-gray-500">Supports JPG, PNG, HEIC up to 10MB</p>
+            </div>
+          </div>
+        );
+      
+      default:
+        return (
+          <div className="text-center py-8">
+            <p className="text-gray-600">Feature coming soon! This will provide detailed information and functionality for {modalType}.</p>
+          </div>
+        );
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -115,7 +187,10 @@ const Dashboard = () => {
         </div>
         <div className="flex items-center space-x-4 mt-4 lg:mt-0">
           <div className="text-sm text-gray-500">Last updated: 5 minutes ago</div>
-          <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center">
+          <button 
+            onClick={() => openModal('quickActions')}
+            className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center"
+          >
             <Plus className="w-4 h-4 mr-2" />
             Quick Action
           </button>
@@ -127,7 +202,8 @@ const Dashboard = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
+          onClick={() => openModal('farmHealth')}
         >
           <div className="flex items-center justify-between">
             <div>
@@ -146,7 +222,8 @@ const Dashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
+          onClick={() => openModal('activeAlerts')}
         >
           <p className="text-sm font-medium text-gray-600">Active Alerts</p>
           <p className="text-3xl font-bold text-gray-900 mt-2">{alerts.length}</p>
@@ -157,7 +234,8 @@ const Dashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
+          onClick={() => openModal('yieldAnalysis')}
         >
           <p className="text-sm font-medium text-gray-600">Yield This Month</p>
           <p className="text-3xl font-bold text-gray-900 mt-2">4,250 kg</p>
@@ -168,7 +246,8 @@ const Dashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+          className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
+          onClick={() => openModal('soilHealth')}
         >
           <p className="text-sm font-medium text-gray-600">Soil Health</p>
           <p className="text-3xl font-bold text-gray-900 mt-2">8.2/10</p>
@@ -223,14 +302,23 @@ const Dashboard = () => {
           <h3 className="text-lg font-semibold text-gray-900 mb-6">Quick Actions</h3>
           <div className="space-y-3">
             {[
-              { icon: Camera, title: 'Scan Crop', desc: 'Take a photo for AI analysis' },
-              { icon: TestTube, title: 'Soil Health', desc: 'Upload soil sample image' },
-              { icon: Cloud, title: 'Weather', desc: 'View 7-day forecast' },
-              { icon: TrendingUp, title: 'Analytics', desc: 'View farm metrics' }
+              { icon: Camera, title: 'Scan Crop', desc: 'Take a photo for AI analysis', route: '/farm-monitor' },
+              { icon: TestTube, title: 'Soil Health', desc: 'Upload soil sample image', route: '/soil-analysis' },
+              { icon: Cloud, title: 'Weather', desc: 'View 7-day forecast', route: '/weather-climate' },
+              { icon: TrendingUp, title: 'Analytics', desc: 'View farm metrics', route: '/dashboard' }
             ].map((action, index) => {
               const Icon = action.icon;
               return (
-                <button key={index} className="w-full p-3 text-left rounded-lg border border-gray-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                <button 
+                  key={index} 
+                  onClick={() => {
+                    if (action.title === 'Scan Crop') window.location.href = '/farm-monitor';
+                    else if (action.title === 'Soil Health') window.location.href = '/soil-analysis';
+                    else if (action.title === 'Weather') window.location.href = '/weather-climate';
+                    else if (action.title === 'Analytics') window.location.href = '/records-finance';
+                  }}
+                  className="w-full p-3 text-left rounded-lg border border-gray-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors"
+                >
                   <div className="flex items-center">
                     <Icon className="w-4 h-4 mr-2 text-emerald-600" />
                     <div>
@@ -349,11 +437,23 @@ const Dashboard = () => {
           <p className="text-gray-700">{selectedAlert?.description}</p>
           <p className="text-sm text-gray-600">Recommended: <strong>{selectedAlert?.action}</strong></p>
           <div className="flex justify-end mt-4 space-x-2">
-            <button onClick={() => setActionModalOpen(false)} className="btn btn-ghost">Close</button>
-            <button onClick={() => { setActionModalOpen(false); handleDismiss(selectedAlert?.id); }} className="btn btn-primary">Mark Resolved</button>
+            <button onClick={() => setActionModalOpen(false)} className="px-4 py-2 text-gray-600 hover:text-gray-800">Close</button>
+            <button onClick={() => { setActionModalOpen(false); handleDismiss(selectedAlert?.id); }} className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg">Mark Resolved</button>
           </div>
         </div>
       </Modal>
+
+      {/* Modal Content Renderer */}
+      {activeModal && (
+        <Modal
+          isOpen={true}
+          onClose={closeModal}
+          title={getModalTitle(activeModal)}
+          size="md"
+        >
+          {renderModalContent(activeModal)}
+        </Modal>
+      )}
     </div>
   );
 };

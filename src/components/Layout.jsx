@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
   Home, Monitor, Cloud, TestTube, Heart, FileText, 
   TrendingUp, Users, Settings, Menu, X, Bell, Search,
-  User, LogOut, ChevronDown
+  User, LogOut, ChevronDown, Droplets, BookOpen
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -19,7 +19,9 @@ const Layout = ({ children }) => {
     { name: 'Farm Monitor', href: '/monitor', icon: Monitor },
     { name: 'Weather & Climate', href: '/weather', icon: Cloud },
     { name: 'Soil Analysis', href: '/soil', icon: TestTube },
+    { name: 'Smart Irrigation', href: '/smart-irrigation', icon: Droplets },
     { name: 'Livestock Manager', href: '/livestock', icon: Heart },
+    { name: 'Farm Records', href: '/farm-records', icon: BookOpen },
     { name: 'Records & Finance', href: '/records', icon: FileText },
     { name: 'Market Intelligence', href: '/market', icon: TrendingUp },
     { name: 'Community', href: '/community', icon: Users },
@@ -40,7 +42,7 @@ const Layout = ({ children }) => {
             <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">AG</span>
             </div>
-            <span className="ml-2 text-xl font-bold text-gray-900">AgroGuard</span>
+            <span className="ml-2 text-xl font-bold text-gray-900">AgroNova</span>
           </div>
           <button
             onClick={() => setSidebarOpen(false)}
@@ -129,10 +131,10 @@ const Layout = ({ children }) => {
               </div>
 
               {/* Notifications */}
-              <button className="relative p-2 text-gray-400 hover:text-gray-500">
+              <Link to="/notifications" className="relative p-2 text-gray-400 hover:text-gray-500">
                 <Bell className="w-6 h-6" />
                 <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-400"></span>
-              </button>
+              </Link>
 
               {/* Profile Dropdown */}
               <div className="relative">

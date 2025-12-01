@@ -7,8 +7,22 @@ import {
   TrendingUp, TrendingDown, RefreshCw, Bell
 } from 'lucide-react';
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import Modal from '../components/Modal';
+import { getGlobalModalTitle, renderGlobalModalContent } from '../utils/globalModals.jsx';
 
 const WeatherClimate = () => {
+  const [activeModal, setActiveModal] = useState(null);
+  const [modalData, setModalData] = useState(null);
+
+  const openModal = (modalType, data = null) => {
+    setActiveModal(modalType);
+    setModalData(data);
+  };
+
+  const closeModal = () => {
+    setActiveModal(null);
+    setModalData(null);
+  };
   const [currentWeather, setCurrentWeather] = useState({
     temperature: 74,
     feelsLike: 78,
@@ -156,13 +170,19 @@ const WeatherClimate = () => {
           <p className="text-gray-600 mt-1">Hyper-local forecasts and climate-smart recommendations</p>
         </div>
         <div className="flex items-center space-x-4 mt-4 lg:mt-0">
-          <button className="flex items-center px-4 py-2 text-gray-600 hover:text-gray-800">
+          <button 
+            onClick={() => openModal('changeLocation')}
+            className="flex items-center px-4 py-2 text-gray-600 hover:text-gray-800"
+          >
             <MapPin className="w-4 h-4 mr-2" />
             Change Location
           </button>
-          <button className="btn btn-ghost">
+          <button 
+            onClick={() => openModal('weatherForecast')}
+            className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors flex items-center"
+          >
             <RefreshCw className="w-4 h-4 mr-2" />
-            Refresh Data
+            Extended Forecast
           </button>
         </div>
       </div>
@@ -331,9 +351,12 @@ const WeatherClimate = () => {
                     </ul>
                   </div>
                   <div className="flex space-x-2 mt-4">
-                    <button className="px-3 py-1 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full text-sm transition-colors">
+                    <button 
+                      onClick={() => openModal('riskAlerts', alert)}
+                      className="px-3 py-1 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full text-sm transition-colors"
+                    >
                       <Bell className="w-3 h-3 mr-1 inline" />
-                      Remind Me
+                      View Details
                     </button>
                     <button className="px-3 py-1 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full text-sm transition-colors">
                       Mark as Addressed
@@ -457,6 +480,18 @@ const WeatherClimate = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Modal Content Renderer */}
+      {activeModal && (
+        <Modal
+          isOpen={true}
+          onClose={closeModal}
+          title={getGlobalModalTitle(activeModal)}
+          size="md"
+        >
+          {renderGlobalModalContent(activeModal, closeModal, openModal)}
+        </Modal>
+      )}
     </div>
   );
 };

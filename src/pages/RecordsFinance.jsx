@@ -7,11 +7,23 @@ import {
   Banknote, ShoppingCart, Tractor, Sprout
 } from 'lucide-react';
 import { PieChart as RechartsPieChart, Pie, Cell, BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import Modal from '../components/Modal';
+import { getGlobalModalTitle, renderGlobalModalContent } from '../utils/globalModals.jsx';
 
 const RecordsFinance = () => {
   const [activeTab, setActiveTab] = useState('overview');
-  const [showAddExpense, setShowAddExpense] = useState(false);
-  const [showAddRevenue, setShowAddRevenue] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
+  const [modalData, setModalData] = useState(null);
+
+  const openModal = (modalType, data = null) => {
+    setActiveModal(modalType);
+    setModalData(data);
+  };
+
+  const closeModal = () => {
+    setActiveModal(null);
+    setModalData(null);
+  };
 
   const financialSummary = {
     totalRevenue: 125000,
@@ -167,15 +179,15 @@ const RecordsFinance = () => {
         </div>
         <div className="flex items-center space-x-3 mt-4 lg:mt-0">
           <button 
-            onClick={() => setShowAddExpense(true)}
-            className="btn btn-ghost"
+            onClick={() => openModal('addExpense')}
+            className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium transition-colors flex items-center"
           >
             <Plus className="w-4 h-4 mr-2" />
             Add Expense
           </button>
           <button 
-            onClick={() => setShowAddRevenue(true)}
-            className="btn btn-primary"
+            onClick={() => openModal('addRevenue')}
+            className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center"
           >
             <Plus className="w-4 h-4 mr-2" />
             Add Revenue
@@ -560,7 +572,7 @@ const RecordsFinance = () => {
                 <div className="text-center py-8">
                   <CreditCard className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                   <p className="text-gray-600 mb-4">No active loan applications</p>
-                  <button className="btn-primary">
+                  <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
                     Apply for Farm Loan
                   </button>
                 </div>
@@ -640,6 +652,18 @@ const RecordsFinance = () => {
           )}
         </div>
       </div>
+
+      {/* Modal Content Renderer */}
+      {activeModal && (
+        <Modal
+          isOpen={true}
+          onClose={closeModal}
+          title={getGlobalModalTitle(activeModal)}
+          size="md"
+        >
+          {renderGlobalModalContent(activeModal, closeModal, openModal)}
+        </Modal>
+      )}
     </div>
   );
 };

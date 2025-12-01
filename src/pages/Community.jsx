@@ -235,99 +235,103 @@ const Community = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
-      {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-emerald-600">Community & Knowledge Hub</h1>
-          <p className="text-gray-600 mt-1">Connect with farmers, share knowledge, and get AI-powered advice</p>
-        </div>
-        <button 
-          onClick={() => setShowChatbot(!showChatbot)}
-          className="btn btn-primary mt-4 lg:mt-0"
-        >
-          <MessageCircle className="w-4 h-4 mr-2" />
-          AI Agronomist
-        </button>
-      </div>
-
-      {/* Main Content Tabs */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-        <div className="border-b border-gray-200">
-          <nav className="flex space-x-4 px-4 overflow-x-auto no-scrollbar -mx-4 scroll-hint">
-            {[
-              { id: 'forum', name: 'Community Forum', icon: MessageCircle },
-              { id: 'alerts', name: 'Local Alerts', icon: AlertTriangle },
-              { id: 'knowledge', name: 'Knowledge Base', icon: Award },
-              { id: 'stories', name: 'Success Stories', icon: Star }
-            ].map((tab) => {
-              const Icon = tab.icon;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center shrink-0 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-sm ${
-                    activeTab === tab.id
-                      ? 'border-emerald-500 text-emerald-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
-                >
-                  <Icon className="w-4 h-4 mr-2" />
-                  {tab.name}
-                </button>
-              );
-            })}
-          </nav>
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-7xl mx-auto space-y-8">
+        {/* Header */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <h1 className="text-4xl font-bold text-emerald-600 mb-2">Community & Knowledge Hub</h1>
+              <p className="text-gray-600 text-lg">Connect with farmers, share knowledge, and get AI-powered advice</p>
+            </div>
+            <button 
+              onClick={() => setShowChatbot(!showChatbot)}
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center mt-6 lg:mt-0"
+            >
+              <MessageCircle className="w-5 h-5 mr-3" />
+              AI Agronomist
+            </button>
+          </div>
         </div>
 
-        <div className="p-6">
-          {activeTab === 'forum' && (
-            <div className="space-y-6">
-              {/* Create Post */}
-              <div className="bg-gray-50 rounded-lg p-4">
-                <div className="flex items-start space-x-3">
-                  <img
-                    src="/api/placeholder/40/40"
-                    alt="Your avatar"
-                    className="w-10 h-10 rounded-full"
-                  />
-                  <div className="flex-1">
-                    <textarea
-                      value={newPost}
-                      onChange={(e) => setNewPost(e.target.value)}
-                      placeholder="Share your farming experience, ask questions, or offer advice..."
-                      className="w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                      rows={3}
+        {/* Main Content Tabs */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100">
+          <div className="border-b border-gray-200">
+            <nav className="flex space-x-6 px-8 py-2 overflow-x-auto">
+              {[
+                { id: 'forum', name: 'Community Forum', icon: MessageCircle },
+                { id: 'alerts', name: 'Local Alerts', icon: AlertTriangle },
+                { id: 'knowledge', name: 'Knowledge Base', icon: Award },
+                { id: 'stories', name: 'Success Stories', icon: Star }
+              ].map((tab) => {
+                const Icon = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`flex items-center shrink-0 whitespace-nowrap py-4 px-3 border-b-3 font-semibold text-base transition-all duration-200 ${
+                      activeTab === tab.id
+                        ? 'border-emerald-500 text-emerald-600'
+                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    }`}
+                  >
+                    <Icon className="w-5 h-5 mr-3" />
+                    {tab.name}
+                  </button>
+                );
+              })}
+            </nav>
+          </div>
+
+          <div className="p-8">
+            {activeTab === 'forum' && (
+              <div className="space-y-8">
+                {/* Create Post */}
+                <div className="bg-gradient-to-r from-emerald-50 to-blue-50 rounded-2xl p-6 border border-emerald-200">
+                  <div className="flex items-start space-x-4">
+                    <img
+                      src="/api/placeholder/50/50"
+                      alt="Your avatar"
+                      className="w-12 h-12 rounded-full border-2 border-white shadow-sm"
                     />
-                    <div className="flex items-center justify-between mt-3">
-                      <div className="flex items-center space-x-3">
-                        <button className="flex items-center text-gray-500 hover:text-gray-700">
-                          <Camera className="w-4 h-4 mr-1" />
-                          Photo
-                        </button>
-                        <button className="flex items-center text-gray-500 hover:text-gray-700">
-                          <MapPin className="w-4 h-4 mr-1" />
-                          Location
+                    <div className="flex-1">
+                      <textarea
+                        value={newPost}
+                        onChange={(e) => setNewPost(e.target.value)}
+                        placeholder="Share your farming experience, ask questions, or offer advice..."
+                        className="w-full p-4 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white"
+                        rows={3}
+                      />
+                      <div className="flex items-center justify-between mt-4">
+                        <div className="flex items-center space-x-4">
+                          <button className="flex items-center text-gray-600 hover:text-emerald-600 transition-colors">
+                            <Camera className="w-5 h-5 mr-2" />
+                            Photo
+                          </button>
+                          <button className="flex items-center text-gray-600 hover:text-emerald-600 transition-colors">
+                            <MapPin className="w-5 h-5 mr-2" />
+                            Location
+                          </button>
+                        </div>
+                        <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center">
+                          <Plus className="w-5 h-5 mr-2" />
+                          Post
                         </button>
                       </div>
-                      <button className="btn btn-primary">
-                        <Plus className="w-4 h-4 mr-2" />
-                        Post
-                      </button>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Forum Posts */}
-              <div className="space-y-6">
-                {forumPosts.map((post) => (
-                  <motion.div
-                    key={post.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-white border border-gray-200 rounded-lg p-6"
-                  >
+                {/* Forum Posts */}
+                <div className="grid gap-8">
+                  {forumPosts.map((post, index) => (
+                    <motion.div
+                      key={post.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-lg hover:border-emerald-300 transition-all duration-300"
+                    >
                     <div className="flex items-start space-x-3 mb-4">
                       <img
                         src={post.avatar}
@@ -394,26 +398,44 @@ const Community = () => {
             </div>
           )}
 
-          {activeTab === 'alerts' && (
-            <div className="space-y-6">
-              {/* Map Placeholder */}
-              <div className="bg-gray-100 rounded-lg h-64 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                  <p className="text-gray-600">Interactive map showing local alerts</p>
-                  <p className="text-sm text-gray-500">Click on markers to view details</p>
+            {activeTab === 'alerts' && (
+              <div className="space-y-8">
+                {/* Header */}
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Local Alerts & Updates</h3>
+                  <p className="text-gray-600 mb-6">Real-time alerts from your farming community</p>
                 </div>
-              </div>
 
-              {/* Alert List */}
-              <div className="space-y-4">
-                {localAlerts.map((alert) => (
-                  <motion.div
-                    key={alert.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className={`alert-card ${getSeverityColor(alert.severity)}`}
-                  >
+                {/* Map */}
+                <div className="bg-gray-100 rounded-2xl h-80 overflow-hidden relative shadow-sm">
+                  <img 
+                    src="https://maps.googleapis.com/maps/api/staticmap?center=38.5816,-121.4944&zoom=10&size=800x300&maptype=roadmap&markers=color:red%7C38.5816,-121.4944&markers=color:yellow%7C36.7783,-119.4179&markers=color:green%7C36.7378,-119.7871&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dO_BcqCGUOdFZE"
+                    alt="Local alerts map"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gray-100 rounded-2xl h-80 flex items-center justify-center" style={{display: 'none'}}>
+                    <div className="text-center">
+                      <MapPin className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                      <p className="text-xl font-semibold text-gray-600 mb-2">Interactive Alert Map</p>
+                      <p className="text-gray-500">Click on markers to view alert details</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Alert List */}
+                <div className="grid gap-6">
+                  {localAlerts.map((alert, index) => (
+                    <motion.div
+                      key={alert.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className={`rounded-2xl p-6 border-l-4 ${getSeverityColor(alert.severity)} hover:shadow-lg transition-all duration-300`}
+                    >
                     <div className="flex items-start">
                       <AlertTriangle className="w-5 h-5 mr-3 mt-0.5" />
                       <div className="flex-1">
@@ -443,41 +465,50 @@ const Community = () => {
             </div>
           )}
 
-          {activeTab === 'knowledge' && (
-            <div className="space-y-6">
-              {/* Search and Filter */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
-                <div className="relative flex-1 max-w-md">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                  <input
-                    type="text"
-                    placeholder="Search knowledge base..."
-                    className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-                  />
+            {activeTab === 'knowledge' && (
+              <div className="space-y-8">
+                {/* Header */}
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Knowledge Base</h3>
+                  <p className="text-gray-600 mb-6">Expert guides and best practices for modern farming</p>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <select className="border border-gray-300 rounded-lg px-3 py-2">
-                    <option>All Categories</option>
-                    <option>Soil Management</option>
-                    <option>Pest Control</option>
-                    <option>Water Management</option>
-                  </select>
-                  <button className="flex items-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
-                    <Filter className="w-4 h-4 mr-2" />
-                    Filter
-                  </button>
-                </div>
-              </div>
 
-              {/* Knowledge Articles */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {knowledgeBase.map((article) => (
-                  <motion.div
-                    key={article.id}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="bg-white border border-gray-200 rounded-lg p-6 hover:border-emerald-300 transition-colors cursor-pointer"
-                  >
+                {/* Search and Filter */}
+                <div className="bg-gray-50 rounded-2xl p-6">
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+                    <div className="relative flex-1 max-w-lg">
+                      <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                      <input
+                        type="text"
+                        placeholder="Search knowledge base..."
+                        className="pl-12 pr-4 py-3 w-full border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      />
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <select className="border border-gray-300 rounded-xl px-4 py-3">
+                        <option>All Categories</option>
+                        <option>Soil Management</option>
+                        <option>Pest Control</option>
+                        <option>Water Management</option>
+                      </select>
+                      <button className="flex items-center px-6 py-3 border border-gray-300 rounded-xl hover:bg-white transition-colors">
+                        <Filter className="w-5 h-5 mr-2" />
+                        Filter
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Knowledge Articles */}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {knowledgeBase.map((article, index) => (
+                    <motion.div
+                      key={article.id}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="bg-white border border-gray-200 rounded-2xl p-8 hover:border-emerald-300 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                    >
                     <div className="flex items-center justify-between mb-3">
                       <span className="px-2 py-1 bg-emerald-100 text-emerald-700 text-xs rounded-full">
                         {article.category}
@@ -522,15 +553,22 @@ const Community = () => {
             </div>
           )}
 
-          {activeTab === 'stories' && (
-            <div className="space-y-8">
-              {successStories.map((story) => (
-                <motion.div
-                  key={story.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-gradient-to-r from-emerald-50 to-blue-50 rounded-xl p-8"
-                >
+            {activeTab === 'stories' && (
+              <div className="space-y-8">
+                {/* Header */}
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Success Stories</h3>
+                  <p className="text-gray-600 mb-6">Learn from farmers who transformed their operations</p>
+                </div>
+
+                {successStories.map((story, index) => (
+                  <motion.div
+                    key={story.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.2 }}
+                    className="bg-gradient-to-r from-emerald-50 to-blue-50 rounded-2xl p-10 border border-emerald-200 hover:shadow-lg transition-all duration-300"
+                  >
                   <div className="grid lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-2">
                       <div className="flex items-center space-x-4 mb-4">
@@ -599,10 +637,10 @@ const Community = () => {
               ))}
             </div>
           )}
+          </div>
         </div>
-      </div>
 
-      {/* AI Chatbot */}
+        {/* AI Chatbot */}
       {showChatbot && (
         <div className="fixed bottom-6 right-6 w-96 bg-white rounded-xl shadow-2xl border border-gray-200 z-50">
           <div className="flex items-center justify-between p-4 border-b border-gray-200">
@@ -674,6 +712,7 @@ const Community = () => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

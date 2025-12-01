@@ -60,7 +60,7 @@ const LandingPage = () => {
       name: 'Maria Santos',
       role: 'Organic Farmer',
       location: 'California',
-      content: 'AgroGuard helped me detect early blight in my tomatoes before it spread. Saved my entire crop!',
+      content: 'AgroNova helped me detect early blight in my tomatoes before it spread. Saved my entire crop!',
       rating: 5
     },
     {
@@ -96,7 +96,7 @@ const LandingPage = () => {
               <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center">
                 <Leaf className="w-6 h-6 text-white" />
               </div>
-              <span className="ml-3 text-2xl font-bold text-gray-900">AgroGuard AI</span>
+              <span className="ml-3 text-2xl font-bold text-gray-900">AgroNova</span>
             </div>
 
             <div className="hidden md:flex items-center space-x-8">
@@ -239,7 +239,7 @@ const LandingPage = () => {
 
           <div className="text-center mb-8">
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">Our Solution</h3>
-            <p className="text-gray-600 max-w-3xl mx-auto">AgroGuard combines AI-driven image analysis, hyper-local weather intelligence, and farm management tools into a single, easy-to-use platform so farmers can detect issues earlier, act faster, and optimize yields.</p>
+            <p className="text-gray-600 max-w-3xl mx-auto">AgroNova combines AI-driven image analysis, hyper-local weather intelligence, and farm management tools into a single, easy-to-use platform so farmers can detect issues earlier, act faster, and optimize yields.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -298,7 +298,7 @@ const LandingPage = () => {
       <section id="how-it-works" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">How AgroGuard Works</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">How AgroNova Works</h2>
             <p className="text-xl text-gray-600">Simple, powerful, effective</p>
           </div>
 
@@ -393,7 +393,7 @@ const LandingPage = () => {
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold mb-6">Ready to Transform Your Farm?</h2>
           <p className="text-xl mb-8 opacity-90">
-            Join thousands of farmers who are already using AgroGuard to increase yields and reduce losses.
+            Join thousands of farmers who are already using AgroNova to increase yields and reduce losses.
           </p>
           <button onClick={handleGetStarted} className="bg-white text-emerald-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg text-lg transition-colors shadow-lg">
             Start Your Free Trial Today
@@ -411,7 +411,7 @@ const LandingPage = () => {
                 <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
                   <Leaf className="w-5 h-5 text-white" />
                 </div>
-                <span className="ml-2 text-xl font-bold">AgroGuard AI</span>
+                <span className="ml-2 text-xl font-bold">AgroNova</span>
               </div>
               <p className="text-gray-400">
                 Empowering farmers with AI-driven insights for sustainable and profitable agriculture.
@@ -446,7 +446,7 @@ const LandingPage = () => {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 AgroGuard AI. All rights reserved.</p>
+            <p>&copy; 2024 AgroNova. All rights reserved.</p>
           </div>
         </div>
       </footer>

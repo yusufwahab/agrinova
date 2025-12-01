@@ -258,7 +258,7 @@ const Settings = () => {
               </div>
 
               <div className="flex justify-end">
-                <button onClick={handleProfileUpdate} className="btn-primary">
+                <button onClick={handleProfileUpdate} className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center">
                   <Save className="w-4 h-4 mr-2" />
                   Save Changes
                 </button>
@@ -455,7 +455,7 @@ const Settings = () => {
               </div>
 
               <div className="flex justify-end">
-                <button onClick={handleNotificationUpdate} className="btn-primary">
+                <button onClick={handleNotificationUpdate} className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center">
                   <Save className="w-4 h-4 mr-2" />
                   Save Preferences
                 </button>
