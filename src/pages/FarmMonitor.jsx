@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { 
   Camera, Upload, AlertTriangle, CheckCircle, 
   Eye, Search, Filter, Calendar, MapPin,
-  Bug, Leaf, Shield, Zap, Clock, Star
+  Bug, Leaf, Shield, Zap, Clock, Star, Volume2
 } from 'lucide-react';
 import Modal from '../components/Modal';
 
@@ -16,6 +16,7 @@ const FarmMonitor = () => {
   const [scanProgress, setScanProgress] = useState(0);
   const [activeModal, setActiveModal] = useState(null);
   const [modalData, setModalData] = useState(null);
+  const [isReading, setIsReading] = useState(false);
   const fileInputRef = useRef(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -215,8 +216,8 @@ const FarmMonitor = () => {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-emerald-600 mb-2">Farm Monitor</h1>
-              <p className="text-gray-600 text-lg">AI-powered real-time monitoring and threat detection</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-emerald-600 mb-2">Farm Monitor</h1>
+              <p className="text-gray-600">AI-powered real-time monitoring and threat detection</p>
             </div>
             <button 
               onClick={() => openModal('newScan')}
@@ -255,7 +256,7 @@ const FarmMonitor = () => {
 
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100">
           <div className="border-b border-gray-200">
-            <nav className="flex space-x-8 px-8 py-2">
+            <nav className="flex flex-col sm:flex-row sm:space-x-8 px-4 sm:px-8 py-2">
               {[
                 { id: 'scan', name: 'Manual Scanning', icon: Camera },
                 { id: 'live', name: 'Live Monitoring', icon: Eye },
@@ -266,14 +267,15 @@ const FarmMonitor = () => {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center py-4 px-2 border-b-3 font-semibold text-base transition-all duration-200 ${
+                    className={`flex items-center py-3 sm:py-4 px-2 border-b-3 font-semibold text-sm sm:text-base transition-all duration-200 w-full sm:w-auto justify-center sm:justify-start ${
                       activeTab === tab.id
                         ? 'border-emerald-500 text-emerald-600'
                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }`}
                   >
-                    <Icon className="w-5 h-5 mr-3" />
-                    {tab.name}
+                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3" />
+                    <span className="hidden sm:inline">{tab.name}</span>
+                    <span className="sm:hidden">{tab.name.split(' ')[0]}</span>
                   </button>
                 );
               })}
@@ -283,11 +285,11 @@ const FarmMonitor = () => {
           <div className="p-8">
             {activeTab === 'scan' && (
               <div className="space-y-8">
-                <div className="grid lg:grid-cols-2 gap-8">
-                  <div className="space-y-6">
+                <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+                  <div className="space-y-4 lg:space-y-6">
                     <div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">Upload Image for Analysis</h3>
-                      <p className="text-gray-600 mb-6">Upload a clear photo of your crops for AI-powered analysis</p>
+                      <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2">Upload Image for Analysis</h3>
+                      <p className="text-gray-600 mb-4 lg:mb-6">Upload a clear photo of your crops for AI-powered analysis</p>
                     </div>
                     <div
                       onClick={() => fileInputRef.current?.click()}
@@ -339,10 +341,10 @@ const FarmMonitor = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-6">
+                  <div className="space-y-4 lg:space-y-6">
                     <div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">Analysis Results</h3>
-                      <p className="text-gray-600 mb-6">AI-powered detection and recommendations</p>
+                      <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2">Analysis Results</h3>
+                      <p className="text-gray-600 mb-4 lg:mb-6">AI-powered detection and recommendations</p>
                     </div>
                     {analyzing ? (
                       <div className="bg-gray-50 rounded-xl p-8 text-center">
@@ -355,13 +357,37 @@ const FarmMonitor = () => {
                     ) : analysisResult ? (
                       <div className="space-y-4">
                         <div className="bg-white border border-gray-200 rounded-xl p-6">
-                          <div className="flex items-center justify-between mb-4">
-                            <h4 className="text-xl font-semibold text-gray-900">{analysisResult.detected}</h4>
-                            <div className="flex items-center space-x-2">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 space-y-2 sm:space-y-0">
+                            <h4 className="text-lg sm:text-xl font-semibold text-gray-900">{analysisResult.detected}</h4>
+                            <div className="flex items-center space-x-2 flex-wrap">
                               <span className={`px-3 py-1 rounded-full text-sm font-medium ${getSeverityColor(analysisResult.severity)}`}>
                                 {analysisResult.severity.toUpperCase()}
                               </span>
                               <span className="text-sm text-gray-500">{analysisResult.confidence}% confidence</span>
+                              <button 
+                                onClick={() => {
+                                  if (isReading) {
+                                    window.speechSynthesis.cancel();
+                                    setIsReading(false);
+                                  } else {
+                                    const text = `${analysisResult.detected}. ${analysisResult.description} ${analysisResult.treatmentUrgency}. Recommendations: ${analysisResult.recommendations.join('. ')}`;
+                                    if ('speechSynthesis' in window) {
+                                      const utterance = new SpeechSynthesisUtterance(text);
+                                      utterance.onend = () => setIsReading(false);
+                                      window.speechSynthesis.speak(utterance);
+                                      setIsReading(true);
+                                    }
+                                  }
+                                }}
+                                className={`p-2 rounded-lg transition-colors ${
+                                  isReading 
+                                    ? 'bg-red-100 text-red-600 hover:bg-red-200' 
+                                    : 'bg-blue-100 text-blue-600 hover:bg-blue-200'
+                                }`}
+                                title={isReading ? 'Stop reading' : 'Read analysis aloud'}
+                              >
+                                <Volume2 className="w-4 h-4" />
+                              </button>
                             </div>
                           </div>
                           
@@ -387,12 +413,36 @@ const FarmMonitor = () => {
                             </ul>
                           </div>
 
-                          <div className="flex space-x-3 mt-6">
-                            <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center flex-1">
+                          <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 mt-6">
+                            <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-4 sm:px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center flex-1">
                               Send Alert
                             </button>
-                            <button className="bg-white hover:bg-gray-50 text-emerald-600 font-semibold py-3 px-6 rounded-lg border-2 border-emerald-600 transition-all duration-200 flex items-center justify-center flex-1">
+                            <button className="bg-white hover:bg-gray-50 text-emerald-600 font-semibold py-3 px-4 sm:px-6 rounded-lg border-2 border-emerald-600 transition-all duration-200 flex items-center justify-center flex-1">
                               Save to Records
+                            </button>
+                            <button 
+                              onClick={() => {
+                                if (isReading) {
+                                  window.speechSynthesis.cancel();
+                                  setIsReading(false);
+                                } else {
+                                  const text = `${analysisResult.detected}. ${analysisResult.description} ${analysisResult.treatmentUrgency}. Recommendations: ${analysisResult.recommendations.join('. ')}`;
+                                  if ('speechSynthesis' in window) {
+                                    const utterance = new SpeechSynthesisUtterance(text);
+                                    utterance.onend = () => setIsReading(false);
+                                    window.speechSynthesis.speak(utterance);
+                                    setIsReading(true);
+                                  }
+                                }
+                              }}
+                              className={`font-semibold py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center ${
+                                isReading 
+                                  ? 'bg-red-600 hover:bg-red-700 text-white' 
+                                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+                              }`}
+                              title={isReading ? 'Stop reading' : 'Read analysis aloud'}
+                            >
+                              <Volume2 className="w-4 h-4" />
                             </button>
                           </div>
                         </div>
@@ -462,18 +512,18 @@ const FarmMonitor = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-lg hover:border-emerald-300 transition-all duration-300"
+                      className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 lg:p-8 hover:shadow-lg hover:border-emerald-300 transition-all duration-300"
                     >
-                      <div className="flex items-start space-x-4">
+                      <div className="flex flex-col sm:flex-row sm:items-start space-y-4 sm:space-y-0 sm:space-x-4">
                         <img
                           src={alert.image}
                           alt={alert.name}
-                          className="w-20 h-20 rounded-lg object-cover flex-shrink-0"
+                          className="w-full h-32 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg object-cover flex-shrink-0"
                         />
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between mb-2">
-                            <h4 className="text-lg font-semibold text-gray-900">{alert.name}</h4>
-                            <div className="flex items-center space-x-2">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 space-y-2 sm:space-y-0">
+                            <h4 className="text-base sm:text-lg font-semibold text-gray-900">{alert.name}</h4>
+                            <div className="flex items-center space-x-2 flex-wrap">
                               <span className={`px-2 py-1 rounded-full text-xs font-medium ${getSeverityColor(alert.severity)}`}>
                                 {alert.severity}
                               </span>
@@ -483,10 +533,10 @@ const FarmMonitor = () => {
                             </div>
                           </div>
                           
-                          <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
+                          <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-4 text-sm text-gray-500 mb-3">
                             <div className="flex items-center">
                               <MapPin className="w-4 h-4 mr-1" />
-                              {alert.location}
+                              <span className="truncate">{alert.location}</span>
                             </div>
                             <div className="flex items-center">
                               <Clock className="w-4 h-4 mr-1" />
@@ -517,20 +567,20 @@ const FarmMonitor = () => {
                             </ul>
                           </div>
 
-                          <div className="flex items-center justify-between mt-4">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-4 space-y-3 sm:space-y-0">
                             <button 
                               onClick={() => openModal('alertDetails', alert)}
-                              className="text-emerald-600 hover:text-emerald-700 text-sm font-medium"
+                              className="text-emerald-600 hover:text-emerald-700 text-sm font-medium text-left"
                             >
                               View Details
                             </button>
-                            <div className="flex space-x-2">
+                            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                               {alert.status === 'active' && (
-                                <button className="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-lg text-sm hover:bg-emerald-200 transition-colors">
+                                <button className="px-3 py-2 bg-emerald-100 text-emerald-700 rounded-lg text-sm hover:bg-emerald-200 transition-colors">
                                   Mark Resolved
                                 </button>
                               )}
-                              <button className="px-3 py-1 bg-gray-100 text-gray-700 rounded-lg text-sm hover:bg-gray-200 transition-colors">
+                              <button className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm hover:bg-gray-200 transition-colors">
                                 Export Report
                               </button>
                             </div>

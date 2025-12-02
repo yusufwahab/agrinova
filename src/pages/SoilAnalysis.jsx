@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { 
   TestTube, Upload, Camera, MapPin, Calendar,
   TrendingUp, TrendingDown, AlertCircle, CheckCircle,
-  Droplets, Zap, Leaf, BarChart3, Target, Clock
+  Droplets, Zap, Leaf, BarChart3, Target, Clock, Volume2
 } from 'lucide-react';
 import { RadialBarChart, RadialBar, BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
@@ -176,8 +176,8 @@ const SoilAnalysis = () => {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-emerald-600 mb-2">Soil & Crop Health Analysis</h1>
-              <p className="text-gray-600 text-lg">AI-powered soil analysis and crop optimization</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-emerald-600 mb-2">Soil & Crop Health Analysis</h1>
+              <p className="text-gray-600">AI-powered soil analysis and crop optimization</p>
             </div>
             <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center mt-6 lg:mt-0">
               <TestTube className="w-5 h-5 mr-3" />
@@ -320,12 +320,12 @@ const SoilAnalysis = () => {
 
           <div className="p-4 sm:p-8">
             {activeTab === 'upload' && (
-              <div className="grid lg:grid-cols-2 gap-12">
+              <div className="grid lg:grid-cols-2 gap-6 lg:gap-12">
                 {/* Upload Section */}
-                <div className="space-y-8">
+                <div className="space-y-6 lg:space-y-8">
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Upload Soil Sample</h3>
-                    <p className="text-gray-600 mb-6">Take a clear photo of your soil sample for AI analysis</p>
+                    <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2">Upload Soil Sample</h3>
+                    <p className="text-gray-600 mb-4 lg:mb-6">Take a clear photo of your soil sample for AI analysis</p>
                   </div>
                   <div
                     onClick={() => fileInputRef.current?.click()}
@@ -409,10 +409,10 @@ const SoilAnalysis = () => {
                 </div>
 
                 {/* Analysis Results */}
-                <div className="space-y-8">
+                <div className="space-y-6 lg:space-y-8">
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Analysis Results</h3>
-                    <p className="text-gray-600 mb-6">AI-powered soil composition and health analysis</p>
+                    <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2">Analysis Results</h3>
+                    <p className="text-gray-600 mb-4 lg:mb-6">AI-powered soil composition and health analysis</p>
                   </div>
                   {analyzing ? (
                     <div className="bg-gray-50 rounded-xl p-8 text-center">
@@ -425,11 +425,11 @@ const SoilAnalysis = () => {
                   ) : analysisResult ? (
                     <div className="space-y-6">
                       {/* Soil Type & Health Score */}
-                      <div className="bg-white border border-gray-200 rounded-xl p-6">
-                        <div className="flex items-center justify-between mb-4">
-                          <h4 className="text-xl font-semibold text-gray-900">{analysisResult.soilType}</h4>
+                      <div className="bg-white border border-gray-200 rounded-xl p-4 lg:p-6">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 space-y-2 sm:space-y-0">
+                          <h4 className="text-lg sm:text-xl font-semibold text-gray-900">{analysisResult.soilType}</h4>
                           <div className="flex items-center space-x-2">
-                            <span className="text-2xl font-bold text-emerald-600">{analysisResult.healthScore}</span>
+                            <span className="text-xl sm:text-2xl font-bold text-emerald-600">{analysisResult.healthScore}</span>
                             <span className="text-sm text-gray-500">/ 100</span>
                           </div>
                         </div>
@@ -477,12 +477,25 @@ const SoilAnalysis = () => {
                           </div>
                         </div>
 
-                        <div className="flex space-x-3 mt-6">
-                          <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-medium transition-colors flex-1">
+                        <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 mt-6">
+                          <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 sm:px-6 py-3 rounded-lg font-medium transition-colors flex-1">
                             Save Analysis
                           </button>
-                          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors flex-1">
+                          <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-3 rounded-lg font-medium transition-colors flex-1">
                             Generate Report
+                          </button>
+                          <button 
+                            onClick={() => {
+                              const text = `Soil analysis results: ${analysisResult.soilType}. Health score: ${analysisResult.healthScore} out of 100. ${analysisResult.characteristics.join('. ')}. Recommendations: ${analysisResult.recommendations.join('. ')}`;
+                              if ('speechSynthesis' in window) {
+                                const utterance = new SpeechSynthesisUtterance(text);
+                                window.speechSynthesis.speak(utterance);
+                              }
+                            }}
+                            className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-lg font-medium transition-colors flex items-center justify-center sm:flex-none"
+                            title="Read soil analysis aloud"
+                          >
+                            <Volume2 className="w-4 h-4" />
                           </button>
                         </div>
                       </div>
@@ -690,35 +703,35 @@ const SoilAnalysis = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-lg hover:border-emerald-300 transition-all duration-300"
+                      className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 lg:p-8 hover:shadow-lg hover:border-emerald-300 transition-all duration-300"
                     >
-                      <div className="flex items-start space-x-4">
+                      <div className="flex flex-col sm:flex-row sm:items-start space-y-4 sm:space-y-0 sm:space-x-4">
                         <img
                           src={analysis.image}
                           alt="Soil sample"
-                          className="w-20 h-20 rounded-lg object-cover shrink-0"
+                          className="w-full h-32 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-lg object-cover flex-shrink-0"
                         />
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between mb-2">
-                            <h4 className="text-lg font-semibold text-gray-900">{analysis.location}</h4>
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 space-y-2 sm:space-y-0">
+                            <h4 className="text-base sm:text-lg font-semibold text-gray-900">{analysis.location}</h4>
                             <div className="flex items-center space-x-2">
-                              <span className="text-2xl font-bold text-emerald-600">{analysis.healthScore}</span>
+                              <span className="text-xl sm:text-2xl font-bold text-emerald-600">{analysis.healthScore}</span>
                               <span className="text-sm text-gray-500">/ 100</span>
                             </div>
                           </div>
                           
-                          <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
+                          <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-4 text-sm text-gray-500 mb-3">
                             <div className="flex items-center">
                               <Calendar className="w-4 h-4 mr-1" />
                               {analysis.date}
                             </div>
                             <div className="flex items-center">
                               <TestTube className="w-4 h-4 mr-1" />
-                              {analysis.soilType}
+                              <span className="truncate">{analysis.soilType}</span>
                             </div>
                           </div>
 
-                          <div className="flex items-center justify-between">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
                             <div>
                               <span className="text-sm text-gray-600">Main Issue: </span>
                               <span className={`text-sm font-medium ${
@@ -727,11 +740,11 @@ const SoilAnalysis = () => {
                                 {analysis.mainIssue}
                               </span>
                             </div>
-                            <div className="flex space-x-2">
-                              <button className="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-lg text-sm hover:bg-emerald-200 transition-colors">
+                            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                              <button className="px-3 py-2 bg-emerald-100 text-emerald-700 rounded-lg text-sm hover:bg-emerald-200 transition-colors">
                                 View Details
                               </button>
-                              <button className="px-3 py-1 bg-gray-100 text-gray-700 rounded-lg text-sm hover:bg-gray-200 transition-colors">
+                              <button className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm hover:bg-gray-200 transition-colors">
                                 Download Report
                               </button>
                             </div>

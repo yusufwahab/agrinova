@@ -3,10 +3,11 @@ import { motion } from 'framer-motion';
 import { 
   Shield, AlertTriangle, Cloud, CheckCircle, 
   Camera, TestTube, TrendingUp,
-  ArrowUp, Plus, Eye
+  ArrowUp, MessageCircle, Eye
 } from 'lucide-react';
 import { LineChart, Line, AreaChart, Area, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import Modal from '../components/Modal';
+import AIChatbot from '../components/AIChatbot';
 
 const Dashboard = () => {
   const [farmHealthScore] = useState(85);
@@ -14,6 +15,7 @@ const Dashboard = () => {
   const [selectedAlert, setSelectedAlert] = useState(null);
   const [activeModal, setActiveModal] = useState(null);
   const [modalData, setModalData] = useState(null);
+  const [chatbotOpen, setChatbotOpen] = useState(false);
 
   const openModal = (modalType, data = null) => {
     setActiveModal(modalType);
@@ -188,11 +190,11 @@ const Dashboard = () => {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div className="text-xs sm:text-sm text-gray-500">Last updated: 5 minutes ago</div>
           <button 
-            onClick={() => openModal('quickActions')}
+            onClick={() => setChatbotOpen(true)}
             className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center text-sm sm:text-base"
           >
-            <Plus className="w-4 h-4 mr-2" />
-            Quick Action
+            <MessageCircle className="w-4 h-4 mr-2" />
+            AI Agronomist
           </button>
         </div>
       </div>
@@ -454,6 +456,12 @@ const Dashboard = () => {
           {renderModalContent(activeModal)}
         </Modal>
       )}
+
+      {/* AI Chatbot */}
+      <AIChatbot 
+        isOpen={chatbotOpen} 
+        onClose={() => setChatbotOpen(false)} 
+      />
     </div>
   );
 };

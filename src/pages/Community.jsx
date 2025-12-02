@@ -241,8 +241,8 @@ const Community = () => {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-emerald-600 mb-2">Community & Knowledge Hub</h1>
-              <p className="text-gray-600 text-lg">Connect with farmers, share knowledge, and get AI-powered advice</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-emerald-600 mb-2">Community & Knowledge Hub</h1>
+              <p className="text-gray-600">Connect with farmers, share knowledge, and get AI-powered advice</p>
             </div>
             <button 
               onClick={() => setShowChatbot(!showChatbot)}
