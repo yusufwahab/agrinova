@@ -44,7 +44,7 @@ const FarmMonitor = () => {
       id: 1,
       type: 'pest',
       name: 'Aphid Infestation',
-      image: '/src/assets/Pest1.jpg',
+      image: '/assets/Pest1.jpg',
       severity: 'high',
       confidence: 94,
       location: 'Zone A - Tomato Field',

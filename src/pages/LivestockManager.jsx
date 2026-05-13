@@ -44,7 +44,7 @@ const LivestockManager = () => {
       healthStatus: 'healthy',
       lastCheckup: '2024-01-10',
       nextVaccination: '2024-02-15',
-      image: '/src/assets/Cattle1.jpg',
+      image: '/assets/Cattle1.jpg',
       earTag: 'C001',
       production: { type: 'milk', daily: '6.5 gal' }
     },
@@ -58,7 +58,7 @@ const LivestockManager = () => {
       healthStatus: 'attention',
       lastCheckup: '2024-01-08',
       nextVaccination: '2024-01-20',
-      image: '/src/assets/Cattle2.jpg',
+      image: '/assets/Cattle2.jpg',
       earTag: 'C002',
       production: null
     },
@@ -72,7 +72,7 @@ const LivestockManager = () => {
       healthStatus: 'healthy',
       lastCheckup: '2024-01-12',
       nextVaccination: '2024-03-01',
-      image: '/src/assets/Cattle3.jpg',
+      image: '/assets/Cattle3.jpg',
       earTag: 'P001',
       production: { type: 'eggs', daily: '1 egg' }
     },
@@ -86,7 +86,7 @@ const LivestockManager = () => {
       healthStatus: 'healthy',
       lastCheckup: '2024-01-05',
       nextVaccination: '2024-02-05',
-      image: '/src/assets/Cattle4.jpg',
+      image: '/assets/Cattle4.jpg',
       earTag: 'S001',
       production: null
     }

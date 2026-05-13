@@ -40,7 +40,7 @@ const SoilAnalysis = () => {
       healthScore: 82,
       soilType: 'Loamy Sand',
       mainIssue: 'Low Phosphorus',
-      image: '/src/assets/Soil1.jpg'
+      image: '/assets/Soil1.jpg'
     },
     {
       id: 2,
@@ -49,7 +49,7 @@ const SoilAnalysis = () => {
       healthScore: 75,
       soilType: 'Clay Loam',
       mainIssue: 'High pH',
-      image: '/src/assets/Soil3.jpg'
+      image: '/assets/Soil3.jpg'
     },
     {
       id: 3,
@@ -58,7 +58,7 @@ const SoilAnalysis = () => {
       healthScore: 88,
       soilType: 'Sandy Loam',
       mainIssue: 'Optimal',
-      image: '/src/assets/Soil1.jpg'
+      image: '/assets/Soil1.jpg'
     }
   ];
 
